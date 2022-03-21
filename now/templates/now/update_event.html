@@ -1,0 +1,50 @@
+{% extends 'now/base.html' %}
+<head>
+  <title>Редактирование события</title>
+</head>
+
+{% block content %}
+
+<div class="container-fluid d-flex h-100 justify-content-center align-items-center p-0 mx-5">
+    <h2 class="text-title">редактирование события</h2>
+</div>
+
+<div class="container-fluid d-flex h-100 justify-content-center align-items-center p-0 my-3 mx-5">
+
+    <div class="card shadow-sm" style="width: 405px; height: auto; background-color: #FFFFFF;">
+
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <center class="my-4">
+        <img class="rounded-circle" src="{{ event.photo.url }}" width="120" height="120">
+        </center>
+
+        <div class="form-group mx-5">
+
+        <div class="form-error">{{ form.non_filed_errors }}</div>
+
+
+        {% for f in form %}
+
+            <div class="card-body-sm">
+                <label class="card-text" for="{{ f.id_for_label }}">{{ f.label }}: </label>
+                <p class="card shadow-sm">{{ f }}</p>
+                <div class="form-error">{{ f.errors }}</div>
+            </div>
+
+        {% endfor %}
+
+        <div class="btn-group my-2 mb-5">
+            <button class="btn btn-sm btn-outline-success" type="submit">Сохранить</button>
+        </div>
+
+
+        </div>
+    </form>
+    </div>
+</div>
+
+
+{% endblock %}

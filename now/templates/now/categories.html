@@ -1,0 +1,24 @@
+{% extends 'now/base.html' %}
+<head>
+  <title>Категории</title>
+</head>
+{% block content %}
+
+<div class="container mx-5">
+  <a class="text-muted" style="text-decoration: none" href="{% url 'categories' %}">категории</a>
+</div>
+
+      <ul class="list-group list-group-horizontal mx-5 my-3">
+        {% for c in categories %}
+          {% if c.event__count > 0 %}
+            <li style="list-style-type:None">
+                <div class="card shadow-sm mx-2 " style="width: auto; height: auto; background-color: #FFFFFF;">
+                <a href="{{ c.get_absolute_url }}" class="text-black mx-2" style="text-decoration: none"><h5>{{ c.category_name }}</h5></a>
+                </div>
+            </li>
+          {% endif %}
+        {% endfor %}
+    </ul>
+
+
+{% endblock %}

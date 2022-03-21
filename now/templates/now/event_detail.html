@@ -1,0 +1,44 @@
+{% extends 'now/base.html' %}
+<head>
+  <title>Подробнее о событии</title>
+</head>
+
+{% block content %}
+    <div class="container-fluid d-flex h-100 justify-content-center align-items-center p-0 my-5 mx-5">
+
+          <div class="card shadow-sm mx-3" style="width: 405px; height: auto; background-color: #FFFFFF;">
+            <center class="my-4">
+            <img class="rounded-circle" src="{{ event.photo.url }}" width="225" height="225">
+            </center>
+
+            <div class="card-body">
+              <h6>{{ event.title }}</h6>
+              <a class="text-muted" style="text-decoration: none" href="{% url 'categories' %}">{{ event.category }}</a>
+              <br><a class="text-info" style="text-decoration: none" href="#">{{ event.user }}</a>
+              <br><small class="text-muted">{{ event.time_update|time:"H\h i\m" }}</small>
+              <p class="card-text">{{ event.content|linebreaks }}</p>
+              <div class="d-flex justify-content-between align-items-center">
+
+                <div class="btn-group">
+
+                  {% if event == event_id.event %}
+                      <a class="btn btn-sm btn-outline-primary mx-0" href="{% url 'user_out' event.slug %}">покинуть событие</a>
+                  {% else %}
+                      <a class="btn btn-sm btn-outline-warning mx-0" href="{% url 'user_join' event.slug %}">присоединиться</a>
+                  {% endif %}
+
+                  {% if request.user == event.user %}
+                      <br><a class="btn btn-sm btn-outline-info mx-3" href="{% url 'update_event' event.slug %}">редактировать</a>
+                      <br><a class="btn btn-sm btn-outline-secondary mx-0" href="{% url 'delete_event' event.slug %}">удалить</a>
+                  {% else %}
+                  {% endif %}
+
+                </div>
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+{% endblock %}

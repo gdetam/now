@@ -1,0 +1,43 @@
+{% extends 'now/base.html' %}
+<head>
+  <title>Изменить профиль</title>
+</head>
+{% block content %}
+
+<div class="container mx-5">
+  <a class="text-muted" style="text-decoration: none" href="{% url 'profile' %}">изменить профиль</a>
+</div>
+
+<div class="container-fluid d-flex h-100 justify-content-center align-items-center p-0 my-3 mx-5">
+
+
+    <div class="card shadow-sm" style="width: 350px; height: auto; background-color: #FFFFFF;">
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <center class="my-4">
+        <img class="rounded-circle" src="{{ user.photo.url }}" width="120" height="120">
+        </center>
+
+        <div class="form-group mx-5">
+
+        {% for f in form %}
+
+            <div class="card-body-sm">
+                <label class="card-text" for="{{ f.id_for_label }}">{{ f.label }}: </label>
+                <p class="card shadow-sm">{{ f }}</p>
+                <div class="form-error">{{ f.errors }}</div>
+            </div>
+
+        {% endfor %}
+
+        <div class="btn-group my-2 mb-5">
+            <button class="btn btn-sm btn-outline-success" type="submit">Сохранить</button>
+        </div>
+        </div>
+
+    </form>
+    </div>
+</div>
+{% endblock %}

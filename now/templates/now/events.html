@@ -1,0 +1,48 @@
+{% extends 'now/base.html' %}
+<head>
+  <title>События</title>
+</head>
+
+{% block content %}
+
+<div class="container mx-5">
+  <a class="text-muted" style="text-decoration: none" href="{% url 'events' %}">события</a>
+</div>
+
+<div class="container-fluid d-flex h-100 justify-content-center align-items-center p-0 my-3 mx-5">
+      <ul class="list-group list-group-horizontal mx-5">
+        {% for e in events %}
+
+        <li style="list-style-type:None">
+          <div class="card shadow-sm mx-3" style="width: 405px; height: auto; background-color: #FFFFFF;">
+            <center class="my-4">
+            <a href="{{ e.get_absolute_url }}"><img class="rounded-circle" src="{{ e.photo.url }}" width="225" height="225"></a>
+            </center>
+
+            <div class="card-body">
+              <h6>{{ e.title }}</h6>
+              <a class="text-muted" style="text-decoration: none" href="{% url 'categories' %}">{{ e.category }}</a>
+              <br><a class="text-info" style="text-decoration: none" href="#">{{ e.user }}</a>
+              <br><small class="text-muted">{{ e.time_update|time:"H\h i\m" }}</small>
+              <p class="card-text">{{ e.content|linebreaks|truncatewords:20 }}</p>
+              <div class="d-flex justify-content-between align-items-center">
+
+                <div class="btn-group">
+                  <a class="btn btn-sm btn-outline-secondary mx-0" href="{{ e.get_absolute_url }}">подробнее</a>
+                </div>
+
+              </div>
+            </div>
+            </div>
+        </li>
+
+        {% endfor %}
+    </ul>
+
+</div>
+
+
+
+
+
+{% endblock %}
